@@ -3,7 +3,7 @@ import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import { REQUEST_API_DATA, receiveApiData, GET_AUTH_TOKEN, RECEIVE_REQUEST_TOKEN,receiveRequestToken } from "./actions";
 
 const apiKey = process.env.REACT_APP_API_KEY; 
-// console.warn(process.env.REACT_APP_API_KEY)
+console.warn(process.env.REACT_APP_API_KEY);
 
 export const fetchData = async () => {
   try {    
@@ -24,7 +24,7 @@ export const getAuthToken = () => {
           const { request_token } = response;
           // after getting the temporary request_token, redirect the user to allow or deny the token
           // after the user action on the TMDB site is finished, the user is redirected back to the same Movie Shrine page
-          window.location = `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=${location}`;
+          window.location = `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=${location}authenticated`;
       })
       .catch(error => console.log(error));
 };
