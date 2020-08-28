@@ -5,7 +5,7 @@ const AnonUser = () => {
     return (
         <div>
             <Navbar/>
-            <div class="container">
+            <div className="container">
             </div>
         </div>
     )

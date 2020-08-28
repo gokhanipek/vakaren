@@ -1,20 +1,20 @@
 import { call, put, takeEvery, takeLatest, take } from "redux-saga/effects";
 
-import { REQUEST_API_DATA, receiveApiDataAction, receiveSearchResultAction, GET_AUTH_TOKEN, GET_POPULAR_MOVIES, GET_SEARCH_RESULT } from "./actions";
+
+import { 
+  GET_AUTH_TOKEN, 
+  GET_POPULAR_MOVIES, 
+  GET_SEARCH_RESULT, 
+  GET_RANDOM_MOVIE_SEARCH,
+  REQUEST_SESSION_ID,
+  GET_MOVIE_BY_ID,
+  receiveSearchResultAction,  
+  receiveRandomMovieSearch, 
+  receivePopularMoviesAction,
+  receiveMovieById
+ } from "./actions";
 
 const apiKey = process.env.REACT_APP_API_KEY; 
-console.warn(process.env.REACT_APP_API_KEY);
-
-export const fetchData = async () => {
-  try {    
-    const response = await fetch(`https://api.themoviedb.org/3/movie/550?api_key=${apiKey}`)
-    const data = await response.json();
-    return data;
-  } catch (e) {
-    console.log(e);
-  }
-};
-
 
 //authentication
 export const getAuthToken = () => {
@@ -28,66 +28,99 @@ export const getAuthToken = () => {
       .catch(error => console.log(error));
 };
 
-export const requestMovieSearch = ({keyword, page}) => {
+export const requestSessionId = (action) => {
+  // after the user allows the request_token, get the new session_id using that token
+  const url = `https://api.themoviedb.org/3/authentication/session/new?api_key=${apiKey}`;
+  const body = JSON.stringify({
+      "request_token": action.data
+  });
+
+
+  fetch(url, {
+      method: 'POST',
+      body: body,
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  })
+      .then(response => response.json())
+      .then(response => {
+          const { success, session_id } = response;
+          if (success) {
+              localStorage.clear();
+              // save the session_id to localStorage so it can be used again
+              localStorage.setItem('vakaren_session_id', JSON.stringify({ session_id }));
+              // set loggedIn state property to true
+              action.type(true);
+          } else {
+              action.type(false);
+          }
+      })
+      .catch(error => console.log(error));
+};
+
+export function* getPopularMovies(action) {
   try {
-    const response = fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${keyword}&page=${'1'}&include_adult=false`);
-    const data = response.json();
-    return data;
-  } catch (e) {
-    console.log(e);
+    const response = yield fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`)
+    const data = yield response.json();
+    yield put(receivePopularMoviesAction(data));
+  } catch (error) {
+      console.log(error); // Just log it for now
   }
 }
 
-//get popular movies
-
-export const receivePopularMovies = async () => {
+export function* getMovieById ({id}) {
   try {    
-    const response = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`)
-    const data = await response.json();
-    return data;
+    const response = fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`)
+    const data = yield response.json();
+    return put(receiveMovieById(data));
   } catch (e) {
     console.log(e);
   }
 };
 
-function* getPopularMovies(action) {
+export function* getMovieSearch(action) {
+  try {
+      const response = yield fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${action.query}&page=${action.page}&include_adult=false`);
+      const data = yield response.json();
+      yield put(receiveSearchResultAction(data));
+  } catch (e) {
+      console.log(e);
+  }
+}
+
+
+export function* getRandomMovieSearch() {
   try {
     // do api call
-    const data = yield call(fetchData);
-    yield put(receiveApiDataAction(data));
+    const response = yield fetch(`https://api.themoviedb.org/3/movie/latest?api_key=${apiKey}&language=en-US`);
+    const data = yield response.json();
+    yield put(receiveRandomMovieSearch(data));
   } catch (e) {
     console.log(e);
   }
 }
 
-function* getMovieSearch({keyword}) {
+export function* addToWatchList() {
+  const account_id = 10;
   try {
     // do api call
-    const data = yield call(requestMovieSearch, keyword);
-    yield put(receiveSearchResultAction(data));
+    const response = yield fetch(`https://api.themoviedb.org/3/account/${account_id}/watchlist?api_key=${apiKey}`);
+    const data = yield response.json();
+    yield put(receiveRandomMovieSearch(data));
   } catch (e) {
     console.log(e);
   }
 }
 
 
-
-// worker Saga: will be fired on USER_FETCH_REQUESTED actions
-
-function* getApiData(action) {
-  try {
-    // do api call
-    const data = yield call(fetchData);
-    yield put(receiveApiDataAction(data));
-  } catch (e) {
-    console.log(e);
-  }
-}
 
 
 export default function* requestApiData() {
-  yield takeLatest( REQUEST_API_DATA, getApiData );
-  yield takeLatest( GET_AUTH_TOKEN, getAuthToken );
-  yield takeLatest( GET_POPULAR_MOVIES, getPopularMovies );
-  yield takeLatest( GET_SEARCH_RESULT, getMovieSearch )
+  yield takeEvery( GET_AUTH_TOKEN, getAuthToken );
+  yield takeEvery( GET_POPULAR_MOVIES, getPopularMovies );
+  yield takeEvery( GET_SEARCH_RESULT, getMovieSearch );
+  yield takeEvery( GET_RANDOM_MOVIE_SEARCH, getRandomMovieSearch );
+  yield takeEvery( REQUEST_SESSION_ID, requestSessionId);
+  yield takeEvery( GET_MOVIE_BY_ID, getMovieById );
 }
