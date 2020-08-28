@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import Vakaren from './../../assets/images/vakaren.png'; 
+
 import './Logo.scss';
 
 const Logo = () => {
@@ -21,11 +23,14 @@ const Logo = () => {
       }
 
     return (
-        <div className="face">
-          <div className="eyes">
-            <div className="eye"></div>
-            <div className="eye"></div>
+        <div className="logo-container">
+          <div className="face">
+            <div className="eyes">
+              <div className="eye"></div>
+              <div className="eye"></div>
+            </div>
           </div>
+          <img alt="vakaren" src={Vakaren} width='270px'/>
         </div>
     )
 }

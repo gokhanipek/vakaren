@@ -1,48 +1,39 @@
 import React, { useEffect } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-
-import { requestApiData, getAuthToken } from "../../actions";
 import { withRouter } from 'react-router-dom'
+import { requestApiDataAction, getAuthTokenAction, getPopularMoviesAction } from "../../store/actions";
+
+import Searchbar from '../Searchbar/Searchbar';
 
 import Logo from './../Logo/Logo'; 
-
-
-
 import './Home.scss';
+import Authenticate from "../Authenticate/Authenticate";
 
-const Home = ({requestApiData,getAuthToken, data, history}) => {
+const Home = ({getAuthTokenAction, location}) => {
   useEffect(() => {
-    requestApiData();
-  }, [requestApiData])
+    // requestApiDataAction();
+    // getPopularMoviesAction();
+  }, [])
 
+  const isAuthenticated = location.search.includes('approved=true')
 
   const onClickHandler = () => {
-    history.push('anonymous')
+    return isAuthenticated ? null : getAuthTokenAction();
   }
+
 
   return (
       <div className="home-wrapper">
-        <div className="jumbotron">
+          <Authenticate isAuthenticated={isAuthenticated} onClickHandler={onClickHandler} />
           <Logo/>
-          <h1 className="display-3">Welcome to Vakaren!</h1>
-          <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-          <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-          <p className="lead">
-          <button className="btn btn-outline-primary" color="primary" onClick={() => { getAuthToken() }}>
-            Authenticate
-          </button>            
-          <button className="btn btn-outline-primary" color="primary" onClick={() => { onClickHandler() }}>
-            Anonymous User
-          </button>
-          </p>
-        </div>
+          <Searchbar/>
       </div>
     )
 }
-const mapStateToProps = state => ({ data: state.data });
+
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ requestApiData, getAuthToken }, dispatch);
+  bindActionCreators({ getAuthTokenAction }, dispatch);
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));
+export default withRouter(connect(null, mapDispatchToProps)(Home));

@@ -6,12 +6,10 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import store from "./store";
-import Home from "./components/Home/Home";
-import AuthenticatedUser from "./components/AuthenticatedUser/AuthenticatedUser";
-import AnonUser from "./components/AnonUser/AnonUser";
-import './assets/theme/bootstrap.css';
-import './assets/theme/theme.css';
+import store from "../store/store";
+import Home from "./Home/Home";
+import AuthenticatedUser from "./AuthenticatedUser/AuthenticatedUser";
+import AnonUser from "./AnonUser/AnonUser";
 
 export default () =>
   <Provider store={store}>
