@@ -19,6 +19,12 @@ export const RECEIVE_SESSION_ID = 'RECEIVE_SESSION_ID';
 export const GET_MOVIE_BY_ID = 'GET_MOVIE_BY_ID';
 export const RECEIVE_MOVIE_BY_ID = 'RECEIVE_MOVIE_BY_ID';
 
+export const GET_MOVIE_VIDEOS = 'GET_MOVIE_VIDEOS';
+export const RECEIVE_MOVIE_VIDEOS = 'RECEIVE_MOVIE_VIDEOS';
+
+export const GET_MOVIE_POSTERS = 'GET_MOVIE_POSTERS';
+export const RECEIVE_MOVIE_POSTERS = 'RECEIVE_MOVIE_POSTERS';
+
 export const requestApiDataAction = () => ({ type: REQUEST_API_DATA });
 export const receiveApiDataAction = data => ({ type: RECEIVE_API_DATA, data });
 
@@ -38,3 +44,9 @@ export const requestSessionId = data => ({ type: REQUEST_SESSION_ID, data });
 
 export const getMovieById = id => ({ type: GET_MOVIE_BY_ID, id });
 export const receiveMovieById = data => ({ type: RECEIVE_MOVIE_BY_ID, data });
+
+export const getMovieVideos = id => ({ type: GET_MOVIE_VIDEOS, id });
+export const receiveMovieVideos = data => ({ type: RECEIVE_MOVIE_VIDEOS, data });
+
+export const getMoviePosters = id => ({ type: GET_MOVIE_POSTERS, id });
+export const receiveMoviePosters = data => ({ type: RECEIVE_MOVIE_POSTERS, data });

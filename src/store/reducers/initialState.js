@@ -5,5 +5,6 @@ export default {
     },
     searchHasResults: false,
     isAuthenticated: false,
-    movieDetails: []
+    movieDetails: {},
+    movieVideos: {}
 };

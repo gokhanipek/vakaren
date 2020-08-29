@@ -16,7 +16,7 @@ const MovieCard = ({movie}) => {
                 <p>{movie.overview}</p>
             </div>
             <div className="card-action">
-                <Link to={`/movie/${movie.id}`} data={movie}> Details </Link>
+                <Link to={`/movie/${movie.id}`}> Details </Link>
             </div>
           </div>
         </div>

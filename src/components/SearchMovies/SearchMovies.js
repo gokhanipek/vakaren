@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { bindActionCreators } from "redux";
+// import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom'
-import { requestApiDataAction, getAuthTokenAction, getPopularMoviesAction, requestSearchResultAction, requestRandomMovieSearch } from "../../store/actions";
+import { requestSearchResultAction, requestRandomMovieSearch } from "../../store/actions";
 
 
 import './SearchMovies.scss';

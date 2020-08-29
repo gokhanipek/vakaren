@@ -1,4 +1,5 @@
-import { call, put, takeEvery, takeLatest, take } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
+// import { call, put, takeEvery, takeLatest, take } from "redux-saga/effects";
 
 
 import { 
@@ -8,10 +9,14 @@ import {
   GET_RANDOM_MOVIE_SEARCH,
   REQUEST_SESSION_ID,
   GET_MOVIE_BY_ID,
+  GET_MOVIE_VIDEOS,
+  GET_MOVIE_POSTERS,
   receiveSearchResultAction,  
   receiveRandomMovieSearch, 
   receivePopularMoviesAction,
-  receiveMovieById
+  receiveMovieById,
+  receiveMovieVideos,
+  receiveMoviePosters
  } from "./actions";
 
 const apiKey = process.env.REACT_APP_API_KEY; 
@@ -64,20 +69,40 @@ export function* getPopularMovies(action) {
     const response = yield fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`)
     const data = yield response.json();
     yield put(receivePopularMoviesAction(data));
-  } catch (error) {
-      console.log(error); // Just log it for now
+  } catch (e) {
+      console.log(e); // Just log it for now
   }
 }
 
-export function* getMovieById ({id}) {
+export function* getMovieById (action) {
   try {    
-    const response = fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`)
+    const response = yield fetch(`https://api.themoviedb.org/3/movie/${action.id}?api_key=${apiKey}`);
     const data = yield response.json();
-    return put(receiveMovieById(data));
+    yield put(receiveMovieById(data));
   } catch (e) {
     console.log(e);
   }
 };
+
+export function* getMovieVideos (action) {
+  try {
+    const response = yield fetch(`https://api.themoviedb.org/3/movie/${action.id}/videos?api_key=${apiKey}&language=en-US`);
+    const data = yield response.json();
+    yield put(receiveMovieVideos(data));
+  } catch(e) {
+    console.log(e);
+  }
+};
+
+export function* getMoviePosters (action) {
+  try {
+    const response = yield fetch(`https://api.themoviedb.org/3/movie/${action.id}/images?api_key=${apiKey}&language=en-US&include_image_language=en,null`);
+    const data = yield response.json();
+    yield put(receiveMoviePosters(data));
+  } catch(e) {
+    console.log(e);
+  }
+}
 
 export function* getMovieSearch(action) {
   try {
@@ -123,4 +148,6 @@ export default function* requestApiData() {
   yield takeEvery( GET_RANDOM_MOVIE_SEARCH, getRandomMovieSearch );
   yield takeEvery( REQUEST_SESSION_ID, requestSessionId);
   yield takeEvery( GET_MOVIE_BY_ID, getMovieById );
+  yield takeEvery( GET_MOVIE_VIDEOS, getMovieVideos );
+  yield takeEvery( GET_MOVIE_POSTERS, getMoviePosters ); 
 }

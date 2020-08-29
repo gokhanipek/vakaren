@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom'
-import { requestApiDataAction, getAuthTokenAction, getPopularMoviesAction, requestSessionId } from "../../store/actions";
+import {  getAuthTokenAction, getPopularMoviesAction, requestSessionId } from "../../store/actions";
 
 import SearchMovies from '../SearchMovies/SearchMovies';
 
@@ -38,11 +38,13 @@ const Home = ({getAuthTokenAction, location, getPopularMoviesAction, searchResul
 
 
   return (
+    <div className="container">
       <div className={`home-wrapper ${searchResults.length > 0 ? 'top' : 'bottom'}`}>
           <Authenticate isAuthenticated={isAuthenticated} onClickHandler={onClickHandler} />
           <Logo/>
           <SearchMovies/>
       </div>
+    </div>
     )
 }
 
