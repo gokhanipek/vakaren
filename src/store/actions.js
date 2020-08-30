@@ -25,6 +25,21 @@ export const RECEIVE_MOVIE_VIDEOS = 'RECEIVE_MOVIE_VIDEOS';
 export const GET_MOVIE_POSTERS = 'GET_MOVIE_POSTERS';
 export const RECEIVE_MOVIE_POSTERS = 'RECEIVE_MOVIE_POSTERS';
 
+export const GET_ACCOUNT_DETAILS = 'GET_ACCOUNT_DETAILS';
+export const RECEIVE_ACCOUNT_DETAILS = 'RECEIVE_ACCOUNT_DETAILS';
+
+export const ADD_TO_LIST = 'ADD_TO_LIST';
+export const ADD_TO_LIST_RESPONSE = 'ADD_TO_LIST_RESPONSE';
+
+export const ADD_TO_WATCHLIST = 'ADD_TO_WATCHLIST';
+export const ADD_TO_WATCHLIST_RESPONSE = 'ADD_TO_WATCHLIST_RESPONSE';
+
+export const ADD_TO_FAVORITELIST = 'ADD_TO_FAVORITELIST';
+export const ADD_TO_FAVORITELIST_RESPONSE = 'ADD_TO_FAVORITELIST_RESPONSE';
+
+export const GET_LIST = 'GET_LIST';
+export const RECEIVE_LIST = 'RECEIVE_LIST';
+
 export const requestApiDataAction = () => ({ type: REQUEST_API_DATA });
 export const receiveApiDataAction = data => ({ type: RECEIVE_API_DATA, data });
 
@@ -50,3 +65,18 @@ export const receiveMovieVideos = data => ({ type: RECEIVE_MOVIE_VIDEOS, data })
 
 export const getMoviePosters = id => ({ type: GET_MOVIE_POSTERS, id });
 export const receiveMoviePosters = data => ({ type: RECEIVE_MOVIE_POSTERS, data });
+
+export const getAccountDetails = () => ({ type: GET_ACCOUNT_DETAILS});
+export const receiveAccountDetails = data => ({ type: RECEIVE_ACCOUNT_DETAILS, data });
+
+export const addToList = (movieId, accountId, listType) => ({ type: ADD_TO_LIST, movieId, accountId, listType });
+export const addToListResponse = data => ({ type: ADD_TO_LIST_RESPONSE, data });
+
+export const addToWatchList = (movieId, accountId) => ({ type: ADD_TO_WATCHLIST, movieId, accountId });
+export const addToWatchListResponse = data => ({ type: ADD_TO_WATCHLIST_RESPONSE, data });
+
+export const addToFavoriteList = (movieId, accountId) => ({ type: ADD_TO_FAVORITELIST, movieId, accountId });
+export const addToFavoriteListResponse = data => ({ type: ADD_TO_FAVORITELIST_RESPONSE, data });
+
+export const getList = (accountId, listType) => ({ type: GET_LIST, accountId, listType });
+export const receiveList = data => ({ type: RECEIVE_LIST, data });

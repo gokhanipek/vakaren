@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom'
-import {  getAuthTokenAction, getPopularMoviesAction, requestSessionId } from "../../store/actions";
+import {  getAuthTokenAction, getPopularMoviesAction, requestSessionId, getAccountDetails } from "../../store/actions";
 
 import SearchMovies from '../SearchMovies/SearchMovies';
 
@@ -14,7 +14,7 @@ const Home = ({getAuthTokenAction, location, getPopularMoviesAction, searchResul
   useEffect(() => {
     const isAuthenticated = location.search.includes('approved=true')
     const {approved, request_token} = isAuthenticated ? authorizedToken() : {};
-    !approved && requestSessionId(request_token);
+    requestSessionId(request_token);
   }, [])
 
   const isAuthenticated = location.search.includes('approved=true')
@@ -50,7 +50,7 @@ const Home = ({getAuthTokenAction, location, getPopularMoviesAction, searchResul
 
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getAuthTokenAction, getPopularMoviesAction, requestSessionId }, dispatch);
+  bindActionCreators({ getAuthTokenAction, getPopularMoviesAction, requestSessionId, getAccountDetails }, dispatch);
 
 const mapStateToProps = state => ({ 
     searchResults: state.data.searchResults.results || null 

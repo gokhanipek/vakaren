@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom'
-import { requestSearchResultAction, requestRandomMovieSearch } from "../../store/actions";
+import { 
+    requestSearchResultAction,
+    requestRandomMovieSearch,
+    getAccountDetails,
+    getList
+} from "../../store/actions";
 
 
 import './SearchMovies.scss';
 import MovieCard from '../MovieCard/MovieCard';
 
-const SearchMovies = ({requestSearchResultAction, requestRandomMovieSearch, searchResults}) => {
+const SearchMovies = ({accountId, requestSearchResultAction, requestRandomMovieSearch, searchResults, getList, getAccountDetails}) => {
 
     const [ searchTerm, setSearchTerm ] = useState('');
 
+    useEffect(() => {
+        getAccountDetails();
+        //update this to be called after an event
+        getList(accountId, 'favorite');
+    }, [])
+  
     
     const handleSubmit = event => {
         event.preventDefault();
@@ -42,20 +53,24 @@ const SearchMovies = ({requestSearchResultAction, requestRandomMovieSearch, sear
             </form>
             </div>
             <div className="row">
-                { searchResults.length > 0 && searchResults.map(movie => <MovieCard movie={movie} /> ) }
+                { searchResults.length > 0 && searchResults.map(movie => <MovieCard accountId={accountId} movie={movie} /> ) }
             </div>
         </>
     )
 }
 
 const mapStateToProps = state => ({ 
-    searchResults: state.data.searchResults.results || null 
+    searchResults: state.data.searchResults.results || null,
+    accountId: state.data.accountDetails.id
+
 });
 
 const mapDispatchToProps = dispatch => {
     return {
         requestSearchResultAction: (query, page) => dispatch(requestSearchResultAction(query, page)),
-        requestRandomMovieSearch: () => dispatch(requestRandomMovieSearch())
+        requestRandomMovieSearch: () => dispatch(requestRandomMovieSearch()),
+        getAccountDetails: () => dispatch(getAccountDetails()),
+        getList: (accountId, listType) => dispatch(getList(accountId, listType))  
     }
 };
 

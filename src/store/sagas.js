@@ -11,12 +11,19 @@ import {
   GET_MOVIE_BY_ID,
   GET_MOVIE_VIDEOS,
   GET_MOVIE_POSTERS,
+  GET_ACCOUNT_DETAILS,
+  ADD_TO_LIST,
+  GET_LIST,
+  SET_TMDB_CONFIG,
   receiveSearchResultAction,  
   receiveRandomMovieSearch, 
   receivePopularMoviesAction,
   receiveMovieById,
   receiveMovieVideos,
-  receiveMoviePosters
+  receiveMoviePosters,
+  receiveAccountDetails,
+  addToListResponse,
+  receiveList
  } from "./actions";
 
 const apiKey = process.env.REACT_APP_API_KEY; 
@@ -52,7 +59,6 @@ export const requestSessionId = (action) => {
       .then(response => {
           const { success, session_id } = response;
           if (success) {
-              localStorage.clear();
               // save the session_id to localStorage so it can be used again
               localStorage.setItem('vakaren_session_id', JSON.stringify({ session_id }));
               // set loggedIn state property to true
@@ -63,6 +69,17 @@ export const requestSessionId = (action) => {
       })
       .catch(error => console.log(error));
 };
+
+export function* getAccountDetails() {
+  const vakaren_session_id = JSON.parse(localStorage.getItem('vakaren_session_id'));
+  try {
+    const response = yield fetch(`https://api.themoviedb.org/3/account?api_key=${apiKey}&session_id=${vakaren_session_id.session_id}`)
+    const data = yield response.json();
+    yield put(receiveAccountDetails(data));
+  } catch (e) {
+      console.log(e);
+  }
+}
 
 export function* getPopularMovies(action) {
   try {
@@ -126,13 +143,44 @@ export function* getRandomMovieSearch() {
   }
 }
 
-export function* addToWatchList() {
-  const account_id = 10;
+export function* addToList({accountId, movieId, listType}) {
+  console.warn('accountId: ', accountId, 'movieId: ',movieId);
+  const vakaren_session_id = JSON.parse(localStorage.getItem('vakaren_session_id'));
+  const url = `https://api.themoviedb.org/3/account/${accountId}/${listType}?api_key=${apiKey}&session_id=${vakaren_session_id.session_id}`;
+
+  const watchlistBody = JSON.stringify({
+      "media_type": "movie",
+      "media_id": movieId,
+      "watchlist": true
+    });
+
+  const favoriteBody = JSON.stringify({
+    "media_type": "movie",
+    "media_id": movieId,
+    "favorite": true
+  });
+ 
+  fetch(url, {
+      method: 'POST',
+      body: listType === 'watchlist' ? watchlistBody : favoriteBody,
+      headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+      }
+  })
+      .then(response => response.json())
+      .then(response => {
+        const data = response.json();
+        addToListResponse(data);
+      })
+      .catch(error => console.log(error));
+}
+
+export function* getList({accountId, listType}) {
   try {
     // do api call
-    const response = yield fetch(`https://api.themoviedb.org/3/account/${account_id}/watchlist?api_key=${apiKey}`);
+    const response = yield fetch(`https://api.themoviedb.org/3/account/${accountId}/${listType}/movies`);
     const data = yield response.json();
-    yield put(receiveRandomMovieSearch(data));
+    yield put(receiveList(data));
   } catch (e) {
     console.log(e);
   }
@@ -150,4 +198,7 @@ export default function* requestApiData() {
   yield takeEvery( GET_MOVIE_BY_ID, getMovieById );
   yield takeEvery( GET_MOVIE_VIDEOS, getMovieVideos );
   yield takeEvery( GET_MOVIE_POSTERS, getMoviePosters ); 
+  yield takeEvery( GET_ACCOUNT_DETAILS, getAccountDetails );
+  yield takeEvery( ADD_TO_LIST, addToList );
+  yield takeEvery( GET_LIST, getList );
 }

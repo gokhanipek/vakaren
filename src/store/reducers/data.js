@@ -7,7 +7,9 @@ import {
   REQUEST_SESSION_ID,
   RECEIVE_MOVIE_BY_ID,
   RECEIVE_MOVIE_VIDEOS,
-  RECEIVE_MOVIE_POSTERS
+  RECEIVE_MOVIE_POSTERS,
+  RECEIVE_ACCOUNT_DETAILS,
+  RECEIVE_LIST
 } from "../actions";
 
 import initialState from './initialState';
@@ -53,11 +55,21 @@ export default (state = initialState, { type, data }) => {
       return {
         ...state,
         movieVideos: data
-      }
+      };
     case RECEIVE_MOVIE_POSTERS:
       return {
         ...state,
         moviePosters: data
+      };
+    case RECEIVE_ACCOUNT_DETAILS: 
+      return {
+        ...state,
+        accountDetails: data
+      };
+    case RECEIVE_LIST: 
+      return {
+        ...state,
+        userList: data
       }
     default:
       return state;

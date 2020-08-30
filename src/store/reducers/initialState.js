@@ -6,5 +6,7 @@ export default {
     searchHasResults: false,
     isAuthenticated: false,
     movieDetails: {},
-    movieVideos: {}
+    movieVideos: {},
+    moviePosters: {},
+    accountDetails: {}
 };
