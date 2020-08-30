@@ -13,4 +13,7 @@ Or use a SSH key.
 Go to directory folder and run:
 
 ### npm install 
+
+and to start: 
+
 ### npm start
