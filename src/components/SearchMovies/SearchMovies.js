@@ -13,15 +13,17 @@ import {
 import './SearchMovies.scss';
 import MovieCard from '../MovieCard/MovieCard';
 
-const SearchMovies = ({accountId, requestSearchResultAction, requestRandomMovieSearch, searchResults, getList, getAccountDetails}) => {
+const SearchMovies = ({accountDetails, requestSearchResultAction, requestRandomMovieSearch, searchResults, getList, getAccountDetails}) => {
 
     const [ searchTerm, setSearchTerm ] = useState('');
 
     useEffect(() => {
         getAccountDetails();
-        //update this to be called after an event
-        getList(accountId, 'favorite');
     }, [])
+
+    useEffect(() => {
+        accountDetails.accountId && getList(accountDetails.accountId, 'favorite');
+    }, [accountDetails])
   
     
     const handleSubmit = event => {
@@ -53,7 +55,7 @@ const SearchMovies = ({accountId, requestSearchResultAction, requestRandomMovieS
             </form>
             </div>
             <div className="row">
-                { searchResults.length > 0 && searchResults.map(movie => <MovieCard accountId={accountId} movie={movie} /> ) }
+                { searchResults.length > 0 && searchResults.map(movie => <MovieCard accountId={accountDetails.accountId} movie={movie} /> ) }
             </div>
         </>
     )
@@ -61,8 +63,7 @@ const SearchMovies = ({accountId, requestSearchResultAction, requestRandomMovieS
 
 const mapStateToProps = state => ({ 
     searchResults: state.data.searchResults.results || null,
-    accountId: state.data.accountDetails.id
-
+    accountDetails: state.data.accountDetails || {}
 });
 
 const mapDispatchToProps = dispatch => {
