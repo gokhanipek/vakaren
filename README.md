@@ -1,9 +1,14 @@
-To do: 
+## To do: 
 - Cache all the functions 
 - Complete all tests
 - update ui to a better version
-- refactor code
+- deep code refactor
 - add paging to movie search and carousel sliders
+- create a config file for Sagas to avoid unreadable endpoints 
+- Adding Typescript and RxJs
+
+# Features
+- User can search movies
 
 Git clone project with HTTPS 
 
