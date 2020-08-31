@@ -15,12 +15,14 @@ const MovieCard = ({movie, addToList, accountId, favorited, watchlisted, getWatc
     }
 
     const clickHandler = (id, accountId, type) => {
-      addToList(id, accountId, type);
+      isAuthenticated && addToList(id, accountId, type);
     }
 
+    const isAuthenticated = JSON.parse(localStorage.getItem('vakaren_session_id'));
+
     useEffect(() => {
-      getFavList(accountId);
-      getWatchList(accountId);
+      isAuthenticated && getFavList(accountId);
+      isAuthenticated && getWatchList(accountId);
     }, [favoritedMovie])
 
     return (
@@ -34,10 +36,12 @@ const MovieCard = ({movie, addToList, accountId, favorited, watchlisted, getWatc
                 <Link to={`/movie/${movie.id}`} className="btn btn-outline movie-card__button"> Details </Link>
               </div>
               <div className="movie-card-actions">
-              <div className="card-buttons">
-                  <i className={`large material-icons white-text fav-or-watch ${watchlisted ? 'watchlist' : '' }`} onClick={() => clickHandler(movie.id, accountId, 'watchlist')}>access_time</i>
-                  <i className={`large material-icons white-text fav-or-watch ${favorited ? 'fav' : '' }`} onClick={() => addToList(movie.id, accountId, 'favorite')}>favorite</i>
+              {
+                isAuthenticated && <div className="card-buttons">
+                    <i className={`large material-icons white-text fav-or-watch ${watchlisted ? 'watchlist' : '' }`} onClick={() => clickHandler(movie.id, accountId, 'watchlist')}>access_time</i>
+                    <i className={`large material-icons white-text fav-or-watch ${favorited ? 'fav' : '' }`} onClick={() => addToList(movie.id, accountId, 'favorite')}>favorite</i>
                 </div>
+              }
               </div>
             </div>
         </div>

@@ -32,8 +32,10 @@ const SearchMovies = ({
 
     const [ searchTerm, setSearchTerm ] = useState('');
 
+    const vakaren_session_id = JSON.parse(localStorage.getItem('vakaren_session_id'));
+
     useEffect(() => {
-        getAccountDetails();
+        vakaren_session_id && getAccountDetails();
         requestLatestMovieSearch();
         return () => {
             resetSearchResults();            
@@ -41,8 +43,8 @@ const SearchMovies = ({
     }, []);
 
     useEffect(() => {
-        getFavList(accountDetails.id, 'favorite');
-        getWatchList(accountDetails.id, 'watchlist')
+        vakaren_session_id && getFavList(accountDetails.id, 'favorite');
+        vakaren_session_id && getWatchList(accountDetails.id, 'watchlist')
     }, [accountDetails]);
     
     const handleSubmit = event => {
@@ -85,7 +87,13 @@ const SearchMovies = ({
                     <MovieCard 
                         watchlisted={userWatchList.some(listObj => listObj.id === movie.id)} 
                         favorited={userFavList.some(listObj => listObj.id === movie.id  )} 
-                        accountId={accountDetails.accountId} 
+                        accountId={accountDetails.accountId || 0} 
+                        movie={movie} 
+                        key={movie.id}
+                    /> )
+                }
+                { !vakaren_session_id && searchResults.map(movie => 
+                    <MovieCard 
                         movie={movie} 
                         key={movie.id}
                     /> )
