@@ -5,11 +5,11 @@ import './Authenticate.scss';
 
 const Authenticate = ({onClickHandler, isAuthenticated}) => {
 
-    const sessionInfo = isAuthenticated ? 'Authenticated Session' : 'Unauthorized Session'
-
+    // const sessionInfo = isAuthenticated ? 'Authenticated Session' : 'Unauthorized Session'
+    const sessionInfo = isAuthenticated ? 'Authenticated Session' : 'Unauthorized Session';
     return (
-        <div className={`authorize-image-container ${isAuthenticated ? 'authenticated' : 'unauthenticated'}`}>
-            <img className="authorize-image" alt="spy" data-position="bottom" data-tooltip="I am a tooltip" src={isAuthenticated ? Spy : SpyDark} onClick={() => { onClickHandler() }}/>
+        <div className={`authorize-image-container ${sessionInfo ? 'authenticated' : 'unauthenticated'}`}>
+            <img className="authorize-image" alt="spy" data-position="bottom" data-tooltip="I am a tooltip" src={sessionInfo ? Spy : SpyDark} onClick={() => { onClickHandler() }}/>
             <p>{sessionInfo}</p>
         </div>
     )}

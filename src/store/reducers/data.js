@@ -3,13 +3,15 @@ import {
   RECEIVE_REQUEST_TOKEN,
   RECEIVE_POPULAR_MOVIES,
   RECEIVE_MOVIE_SEARCH,
-  RECEIVE_RANDOM_MOVIE_SEARCH,
+  RECEIVE_LATEST_MOVIE_SEARCH,
   REQUEST_SESSION_ID,
   RECEIVE_MOVIE_BY_ID,
   RECEIVE_MOVIE_VIDEOS,
   RECEIVE_MOVIE_POSTERS,
   RECEIVE_ACCOUNT_DETAILS,
-  RECEIVE_LIST
+  RECEIVE_LIST,
+  RESET_SEARCH_RESULTS,
+  ADD_TO_LIST_RESPONSE
 } from "../actions";
 
 import initialState from './initialState';
@@ -31,10 +33,10 @@ export default (state = initialState, { type, data }) => {
         ...state,
         searchResults: data
       };
-    case RECEIVE_RANDOM_MOVIE_SEARCH: 
+    case RECEIVE_LATEST_MOVIE_SEARCH: 
       return {
         ...state,
-        randomMovieResult: data
+        latestMovieResultId: data.id
       };
     case REQUEST_SESSION_ID:
       return {
@@ -46,6 +48,14 @@ export default (state = initialState, { type, data }) => {
         ...state,
         movieDetails: data
       };
+    case ADD_TO_LIST_RESPONSE:
+      return {
+        ...state,
+        favoriteMovies: {
+          ...state.favoriteMovies,
+          data
+        }
+      }
     case RECEIVE_API_DATA: 
       return {
         ...state,
@@ -70,6 +80,11 @@ export default (state = initialState, { type, data }) => {
       return {
         ...state,
         userList: data
+      }
+    case RESET_SEARCH_RESULTS:
+      return {
+        ...state,
+        searchResults: initialState.searchResults
       }
     default:
       return state;

@@ -4,39 +4,60 @@ import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom'
 import { 
     requestSearchResultAction,
-    requestRandomMovieSearch,
+    requestLatestMovieSearch,
     getAccountDetails,
-    getList
+    getList,
+    resetSearchResults
 } from "../../store/actions";
 
 
 import './SearchMovies.scss';
 import MovieCard from '../MovieCard/MovieCard';
 
-const SearchMovies = ({accountDetails, requestSearchResultAction, requestRandomMovieSearch, searchResults, getList, getAccountDetails}) => {
+const SearchMovies = ({
+    history,
+    accountDetails,
+    requestSearchResultAction,
+    requestLatestMovieSearch,
+    searchResults,
+    getList,
+    getAccountDetails,
+    latestMovieResultId,
+    resetSearchResults,
+    userList
+}) => {
 
     const [ searchTerm, setSearchTerm ] = useState('');
 
     useEffect(() => {
         getAccountDetails();
-    }, [])
+        requestLatestMovieSearch();
+        return () => {
+            resetSearchResults();            
+          };
+    }, []);
 
     useEffect(() => {
-        accountDetails.accountId && getList(accountDetails.accountId, 'favorite');
-    }, [accountDetails])
-  
+        getList(accountDetails.id, 'favorite')
+    }, [accountDetails]);
     
     const handleSubmit = event => {
         event.preventDefault();
         const query = encodeURIComponent(searchTerm.trim());
         if (query === '') return; // Add message for the user to type something
         requestSearchResultAction(query, 1);
-
     }
+
+    const onClickRandomMovieHandler = () => {
+        const getRandomMovie = Math.floor(Math.random() * latestMovieResultId) + 1 
+        history.push(`/movie/${getRandomMovie}`)
+    } 
 
     const handleChange = event => {
         setSearchTerm(event.target.value);
     };
+
+    console.warn(userList && userList.results, searchResults);
 
     return (
         <>
@@ -48,14 +69,14 @@ const SearchMovies = ({accountDetails, requestSearchResultAction, requestRandomM
                     <button type="submit" className="waves-effect waves-light btn light-blue">
                         Search
                     </button>            
-                    <button type="submit" className="waves-effect waves-light btn light-blue" onClick={() => requestRandomMovieSearch()}>
+                    <span type="submit" className="waves-effect waves-light btn light-blue" onClick={() => onClickRandomMovieHandler()}>
                         I feel lucky
-                    </button>
+                    </span>
                 </div>
             </form>
             </div>
             <div className="row">
-                { searchResults.length > 0 && searchResults.map(movie => <MovieCard accountId={accountDetails.accountId} movie={movie} /> ) }
+                { searchResults.length > 0 && searchResults.map(movie => <MovieCard favorited={userList.results.some(listObj => listObj.id == movie.id  )} userList={userList.results} accountId={accountDetails.accountId} movie={movie} /> ) }
             </div>
         </>
     )
@@ -63,15 +84,18 @@ const SearchMovies = ({accountDetails, requestSearchResultAction, requestRandomM
 
 const mapStateToProps = state => ({ 
     searchResults: state.data.searchResults.results || null,
-    accountDetails: state.data.accountDetails || {}
+    accountDetails: state.data.accountDetails || {},
+    latestMovieResultId: state.data.latestMovieResultId,
+    userList: state.data.userList
 });
 
 const mapDispatchToProps = dispatch => {
     return {
         requestSearchResultAction: (query, page) => dispatch(requestSearchResultAction(query, page)),
-        requestRandomMovieSearch: () => dispatch(requestRandomMovieSearch()),
+        requestLatestMovieSearch: () => dispatch(requestLatestMovieSearch()),
         getAccountDetails: () => dispatch(getAccountDetails()),
-        getList: (accountId, listType) => dispatch(getList(accountId, listType))  
+        getList: (accountId, listType) => dispatch(getList(accountId, listType)),
+        resetSearchResults: () => dispatch(resetSearchResults())
     }
 };
 

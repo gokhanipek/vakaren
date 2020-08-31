@@ -10,8 +10,8 @@ export const RECEIVE_POPULAR_MOVIES = 'RECEIVE_POPULAR_MOVIES';
 export const GET_SEARCH_RESULT = 'GET_SEARCH_RESULT';
 export const RECEIVE_MOVIE_SEARCH = 'RECEIVE_MOVIE_SEARCH';
 
-export const GET_RANDOM_MOVIE_SEARCH = 'GET_RANDOM_MOVIE_SEARCH';
-export const RECEIVE_RANDOM_MOVIE_SEARCH = 'RECEIVE_RANDOM_MOVIE_SEARCH';
+export const GET_LATEST_MOVIE_SEARCH = 'GET_LATEST_MOVIE_SEARCH';
+export const RECEIVE_LATEST_MOVIE_SEARCH = 'RECEIVE_LATEST_MOVIE_SEARCH';
 
 export const REQUEST_SESSION_ID = 'REQUEST_SESSION_ID';
 export const RECEIVE_SESSION_ID = 'RECEIVE_SESSION_ID';
@@ -40,6 +40,8 @@ export const ADD_TO_FAVORITELIST_RESPONSE = 'ADD_TO_FAVORITELIST_RESPONSE';
 export const GET_LIST = 'GET_LIST';
 export const RECEIVE_LIST = 'RECEIVE_LIST';
 
+export const RESET_SEARCH_RESULTS = 'RESET_SEARCH_RESULTS'; 
+
 export const requestApiDataAction = () => ({ type: REQUEST_API_DATA });
 export const receiveApiDataAction = data => ({ type: RECEIVE_API_DATA, data });
 
@@ -52,8 +54,8 @@ export const receivePopularMoviesAction = data => ({ type: RECEIVE_POPULAR_MOVIE
 export const requestSearchResultAction = (query, page) => ({ type: GET_SEARCH_RESULT, query, page }); 
 export const receiveSearchResultAction = data => ({ type: RECEIVE_MOVIE_SEARCH, data }); 
 
-export const requestRandomMovieSearch = () => ({ type: GET_RANDOM_MOVIE_SEARCH });
-export const receiveRandomMovieSearch = data => ({ type: RECEIVE_RANDOM_MOVIE_SEARCH, data});
+export const requestLatestMovieSearch = () => ({ type: GET_LATEST_MOVIE_SEARCH });
+export const receiveRandomMovieSearch = data => ({ type: RECEIVE_LATEST_MOVIE_SEARCH, data});
 
 export const requestSessionId = data => ({ type: REQUEST_SESSION_ID, data });
 
@@ -72,11 +74,9 @@ export const receiveAccountDetails = data => ({ type: RECEIVE_ACCOUNT_DETAILS, d
 export const addToList = (movieId, accountId, listType) => ({ type: ADD_TO_LIST, movieId, accountId, listType });
 export const addToListResponse = data => ({ type: ADD_TO_LIST_RESPONSE, data });
 
-export const addToWatchList = (movieId, accountId) => ({ type: ADD_TO_WATCHLIST, movieId, accountId });
-export const addToWatchListResponse = data => ({ type: ADD_TO_WATCHLIST_RESPONSE, data });
-
-export const addToFavoriteList = (movieId, accountId) => ({ type: ADD_TO_FAVORITELIST, movieId, accountId });
-export const addToFavoriteListResponse = data => ({ type: ADD_TO_FAVORITELIST_RESPONSE, data });
-
 export const getList = (accountId, listType) => ({ type: GET_LIST, accountId, listType });
 export const receiveList = data => ({ type: RECEIVE_LIST, data });
+
+export const resetSearchResults = () => ({ type: RESET_SEARCH_RESULTS })
+
+export const addedToFavorites = data => ({type: ADD_TO_LIST_RESPONSE, data})

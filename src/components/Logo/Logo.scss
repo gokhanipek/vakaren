@@ -33,4 +33,14 @@
     border-radius:50%;
     transform:translate(-50%,-50%);
   }
+  &.navbar {
+    .face {
+      display: none;
+    }
+    .logo {
+      padding: 10px;
+      width: auto;
+      height: 70px;
+    }
+  }
 }

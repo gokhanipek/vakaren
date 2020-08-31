@@ -7,8 +7,6 @@ import {
 } from "react-router-dom";
 import store from "../store/store";
 import Home from "./Home/Home";
-import AuthenticatedUser from "./AuthenticatedUser/AuthenticatedUser";
-import AnonUser from "./AnonUser/AnonUser";
 import MoviePage from "./MoviePage/MoviePage";
 
 export default () =>
@@ -17,12 +15,6 @@ export default () =>
       <Switch>
         <Route exact path="/">
           <Home />
-        </Route>
-        <Route path="/authenticated">
-          <AuthenticatedUser />
-        </Route>
-        <Route path="/anonymous">
-          <AnonUser />
         </Route>
         <Route path="/movie/:id" component={MoviePage}/>
       </Switch>

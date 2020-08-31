@@ -1,12 +1,13 @@
 export default {
     apiToken: {},
     searchResults: {
-        results: []
+        results: [],
+        favorited: []
     },
     searchHasResults: false,
     isAuthenticated: false,
     movieDetails: {},
     movieVideos: {},
     moviePosters: {},
-    accountDetails: {}
+    accountDetails: {},
 };

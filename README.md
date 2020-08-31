@@ -2,7 +2,8 @@ To do:
 - Cache all the functions 
 - Complete all tests
 - update ui to a better version
-- refactor code 
+- refactor code
+- add paging to movie search and carousel sliders
 
 Git clone project with HTTPS 
 

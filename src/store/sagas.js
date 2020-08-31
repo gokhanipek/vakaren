@@ -6,7 +6,7 @@ import {
   GET_AUTH_TOKEN, 
   GET_POPULAR_MOVIES, 
   GET_SEARCH_RESULT, 
-  GET_RANDOM_MOVIE_SEARCH,
+  GET_LATEST_MOVIE_SEARCH,
   REQUEST_SESSION_ID,
   GET_MOVIE_BY_ID,
   GET_MOVIE_VIDEOS,
@@ -14,7 +14,7 @@ import {
   GET_ACCOUNT_DETAILS,
   ADD_TO_LIST,
   GET_LIST,
-  SET_TMDB_CONFIG,
+  RESET_SEARCH_RESULTS,
   receiveSearchResultAction,  
   receiveRandomMovieSearch, 
   receivePopularMoviesAction,
@@ -23,7 +23,9 @@ import {
   receiveMoviePosters,
   receiveAccountDetails,
   addToListResponse,
-  receiveList
+  receiveList,
+  resetSearch,
+  addedToFavorites
  } from "./actions";
 
 const apiKey = process.env.REACT_APP_API_KEY; 
@@ -132,7 +134,7 @@ export function* getMovieSearch(action) {
 }
 
 
-export function* getRandomMovieSearch() {
+export function* getLatestMovieSearch() {
   try {
     // do api call
     const response = yield fetch(`https://api.themoviedb.org/3/movie/latest?api_key=${apiKey}&language=en-US`);
@@ -143,42 +145,51 @@ export function* getRandomMovieSearch() {
   }
 }
 
-export function* addToList({accountId, movieId, listType}) {
-  console.warn('accountId: ', accountId, 'movieId: ',movieId);
-  const vakaren_session_id = JSON.parse(localStorage.getItem('vakaren_session_id'));
-  const url = `https://api.themoviedb.org/3/account/${accountId}/${listType}?api_key=${apiKey}&session_id=${vakaren_session_id.session_id}`;
+export function* addToList({accountId, movieId, listType, type}) {
 
-  const watchlistBody = JSON.stringify({
-      "media_type": "movie",
-      "media_id": movieId,
-      "watchlist": true
-    });
+  try {
+    const vakaren_session_id = JSON.parse(localStorage.getItem('vakaren_session_id'));
+    const url = `https://api.themoviedb.org/3/account/${accountId}/${listType}?api_key=${apiKey}&session_id=${vakaren_session_id.session_id}`;
 
-  const favoriteBody = JSON.stringify({
-    "media_type": "movie",
-    "media_id": movieId,
-    "favorite": true
-  });
- 
-  fetch(url, {
-      method: 'POST',
-      body: listType === 'watchlist' ? watchlistBody : favoriteBody,
-      headers: {
-          'Content-Type': 'application/json;charset=utf-8'
+    const body = JSON.stringify({
+        "media_type": "movie",
+        "media_id": movieId,
+        [listType]: true
+      });
+  
+      const response = yield fetch(url, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        }
+      });
+
+      const responseJSON = yield response.json();
+
+      const { success } = responseJSON;
+
+      if (success) {
+        yield put(addToListResponse(
+          {
+            movieId,
+            favorited: true
+          }
+        ));
+      } else {
+          // good to add messages for the user why it failed; according to the status_code that is returned
+          console.log('Action failed');
       }
-  })
-      .then(response => response.json())
-      .then(response => {
-        const data = response.json();
-        addToListResponse(data);
-      })
-      .catch(error => console.log(error));
+  } catch(error){
+    console.log(error)
+  }
 }
 
 export function* getList({accountId, listType}) {
+  const vakaren_session_id = JSON.parse(localStorage.getItem('vakaren_session_id'));
   try {
     // do api call
-    const response = yield fetch(`https://api.themoviedb.org/3/account/${accountId}/${listType}/movies`);
+    const response = yield fetch(`https://api.themoviedb.org/3/account/${accountId}/${listType}/movies?api_key=${apiKey}&language=en-US&session_id=${vakaren_session_id.session_id}&sort_by=created_at.asc&page=1`);
     const data = yield response.json();
     yield put(receiveList(data));
   } catch (e) {
@@ -188,12 +199,11 @@ export function* getList({accountId, listType}) {
 
 
 
-
 export default function* requestApiData() {
   yield takeEvery( GET_AUTH_TOKEN, getAuthToken );
   yield takeEvery( GET_POPULAR_MOVIES, getPopularMovies );
   yield takeEvery( GET_SEARCH_RESULT, getMovieSearch );
-  yield takeEvery( GET_RANDOM_MOVIE_SEARCH, getRandomMovieSearch );
+  yield takeEvery( GET_LATEST_MOVIE_SEARCH, getLatestMovieSearch );
   yield takeEvery( REQUEST_SESSION_ID, requestSessionId);
   yield takeEvery( GET_MOVIE_BY_ID, getMovieById );
   yield takeEvery( GET_MOVIE_VIDEOS, getMovieVideos );

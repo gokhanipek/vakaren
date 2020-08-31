@@ -13,11 +13,13 @@ import Authenticate from "../Authenticate/Authenticate";
 const Home = ({getAuthTokenAction, location, getPopularMoviesAction, searchResults, requestSessionId}) => {
   useEffect(() => {
     const isAuthenticated = location.search.includes('approved=true')
-    const {approved, request_token} = isAuthenticated ? authorizedToken() : {};
+    // const sessionInfo = JSON.parse(localStorage.getItem('vakaren_session_id')) ? 'Authenticated Session' : 'Unauthorized Session';
+    const {request_token} = isAuthenticated ? authorizedToken() : {};
     requestSessionId(request_token);
   }, [])
 
-  const isAuthenticated = location.search.includes('approved=true')
+  // const isAuthenticated = location.search.includes('approved=true')
+  const isAuthenticated = JSON.parse(localStorage.getItem('vakaren_session_id'));
 
   const authorizedToken = () => {
     if(location.search === '') return null;
@@ -31,6 +33,7 @@ const Home = ({getAuthTokenAction, location, getPopularMoviesAction, searchResul
 
     return paramsObject;
   }
+
 
   const onClickHandler = () => {
     return isAuthenticated ? null : getAuthTokenAction();
