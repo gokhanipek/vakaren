@@ -13,7 +13,7 @@ export default () =>
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route exact path="/">
+        <Route path="/">
           <Home />
         </Route>
         <Route path="/movie/:id" component={MoviePage}/>
