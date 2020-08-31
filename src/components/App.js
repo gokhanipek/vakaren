@@ -17,6 +17,7 @@ export default () =>
           <Home />
         </Route>
         <Route path="/movie/:id" component={MoviePage}/>
+        <Route path="/vakaren" component={Home}/>
       </Switch>
     </Router>
   </Provider>;
