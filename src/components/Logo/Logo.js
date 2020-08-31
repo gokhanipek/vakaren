@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Vakaren from './../../assets/images/vakaren.png'; 
-
 import './Logo.scss';
 
-const Logo = ({classes}) => {
+const Logo = ({classes, onClickHandler}) => {
     useEffect(() => {
         document.documentElement.addEventListener('mousemove', eyeMovementAnimation)
         return () => {
@@ -31,7 +30,7 @@ const Logo = ({classes}) => {
               <div className="eye"></div>
             </div>
           </div>
-          <Link to="/">
+          <Link to="/" onClick={() => { onClickHandler() }}>
             <img className="logo" alt="vakaren" src={Vakaren} width='270px'/>
           </Link>
         </div>

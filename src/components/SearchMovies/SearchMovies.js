@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-// import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom'
+import { get } from 'lodash';
 import { 
     requestSearchResultAction,
     requestLatestMovieSearch,
     getAccountDetails,
-    getList,
+    getFavList,
+    getWatchList,
     resetSearchResults
 } from "../../store/actions";
 
@@ -20,11 +21,13 @@ const SearchMovies = ({
     requestSearchResultAction,
     requestLatestMovieSearch,
     searchResults,
-    getList,
+    getFavList,
+    getWatchList,
     getAccountDetails,
     latestMovieResultId,
     resetSearchResults,
-    userList
+    userFavList,
+    userWatchList
 }) => {
 
     const [ searchTerm, setSearchTerm ] = useState('');
@@ -38,7 +41,8 @@ const SearchMovies = ({
     }, []);
 
     useEffect(() => {
-        getList(accountDetails.id, 'favorite')
+        getFavList(accountDetails.id, 'favorite');
+        getWatchList(accountDetails.id, 'watchlist')
     }, [accountDetails]);
     
     const handleSubmit = event => {
@@ -57,7 +61,8 @@ const SearchMovies = ({
         setSearchTerm(event.target.value);
     };
 
-    console.warn(userList && userList.results, searchResults);
+    const userListResultsExists = userFavList.length > 0 && userWatchList.length > 0;
+    const searchResultsExists = searchResults && searchResults.length > 0;
 
     return (
         <>
@@ -76,17 +81,26 @@ const SearchMovies = ({
             </form>
             </div>
             <div className="row">
-                { searchResults.length > 0 && searchResults.map(movie => <MovieCard favorited={userList.results.some(listObj => listObj.id == movie.id  )} userList={userList.results} accountId={accountDetails.accountId} movie={movie} /> ) }
+                { userListResultsExists && searchResultsExists && searchResults.map(movie => 
+                    <MovieCard 
+                        watchlisted={userWatchList.some(listObj => listObj.id === movie.id)} 
+                        favorited={userFavList.some(listObj => listObj.id === movie.id  )} 
+                        accountId={accountDetails.accountId} 
+                        movie={movie} 
+                        key={movie.id}
+                    /> )
+                }
             </div>
         </>
     )
 }
 
 const mapStateToProps = state => ({ 
-    searchResults: state.data.searchResults.results || null,
+    searchResults: get(state, 'data.searchResults.results', []),
     accountDetails: state.data.accountDetails || {},
     latestMovieResultId: state.data.latestMovieResultId,
-    userList: state.data.userList
+    userFavList: get(state, 'data.userFavList.results', []),
+    userWatchList: get(state, 'data.userWatchList.results', [])
 });
 
 const mapDispatchToProps = dispatch => {
@@ -94,7 +108,8 @@ const mapDispatchToProps = dispatch => {
         requestSearchResultAction: (query, page) => dispatch(requestSearchResultAction(query, page)),
         requestLatestMovieSearch: () => dispatch(requestLatestMovieSearch()),
         getAccountDetails: () => dispatch(getAccountDetails()),
-        getList: (accountId, listType) => dispatch(getList(accountId, listType)),
+        getFavList: (accountId) => dispatch(getFavList(accountId)),
+        getWatchList: (accountId) => dispatch(getWatchList(accountId)),
         resetSearchResults: () => dispatch(resetSearchResults())
     }
 };

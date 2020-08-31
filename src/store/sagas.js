@@ -13,8 +13,8 @@ import {
   GET_MOVIE_POSTERS,
   GET_ACCOUNT_DETAILS,
   ADD_TO_LIST,
-  GET_LIST,
-  RESET_SEARCH_RESULTS,
+  GET_FAV_LIST,
+  GET_WATCH_LIST,
   receiveSearchResultAction,  
   receiveRandomMovieSearch, 
   receivePopularMoviesAction,
@@ -23,9 +23,8 @@ import {
   receiveMoviePosters,
   receiveAccountDetails,
   addToListResponse,
-  receiveList,
-  resetSearch,
-  addedToFavorites
+  receiveWatchList,
+  receiveFavList,
  } from "./actions";
 
 const apiKey = process.env.REACT_APP_API_KEY; 
@@ -61,14 +60,9 @@ export const requestSessionId = (action) => {
       .then(response => {
           const { success, session_id } = response;
           if (success) {
-              // save the session_id to localStorage so it can be used again
               localStorage.setItem('vakaren_session_id', JSON.stringify({ session_id }));
-              // set loggedIn state property to true
-              action.type(true);
-          } else {
-              action.type(false);
           }
-      })
+        })
       .catch(error => console.log(error));
 };
 
@@ -185,13 +179,25 @@ export function* addToList({accountId, movieId, listType, type}) {
   }
 }
 
-export function* getList({accountId, listType}) {
+export function* getFavList({accountId}) {
   const vakaren_session_id = JSON.parse(localStorage.getItem('vakaren_session_id'));
   try {
     // do api call
-    const response = yield fetch(`https://api.themoviedb.org/3/account/${accountId}/${listType}/movies?api_key=${apiKey}&language=en-US&session_id=${vakaren_session_id.session_id}&sort_by=created_at.asc&page=1`);
+    const response = yield fetch(`https://api.themoviedb.org/3/account/${accountId}/favorite/movies?api_key=${apiKey}&language=en-US&session_id=${vakaren_session_id.session_id}&sort_by=created_at.asc&page=1`);
     const data = yield response.json();
-    yield put(receiveList(data));
+    yield put(receiveFavList(data));
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export function* getWatchList({accountId}) {
+  const vakaren_session_id = JSON.parse(localStorage.getItem('vakaren_session_id'));
+  try {
+    // do api call
+    const response = yield fetch(`https://api.themoviedb.org/3/account/${accountId}/watchlist/movies?api_key=${apiKey}&language=en-US&session_id=${vakaren_session_id.session_id}&sort_by=created_at.asc&page=1`);
+    const data = yield response.json();
+    yield put(receiveWatchList(data));
   } catch (e) {
     console.log(e);
   }
@@ -210,5 +216,6 @@ export default function* requestApiData() {
   yield takeEvery( GET_MOVIE_POSTERS, getMoviePosters ); 
   yield takeEvery( GET_ACCOUNT_DETAILS, getAccountDetails );
   yield takeEvery( ADD_TO_LIST, addToList );
-  yield takeEvery( GET_LIST, getList );
+  yield takeEvery( GET_FAV_LIST, getFavList );
+  yield takeEvery( GET_WATCH_LIST, getWatchList );
 }

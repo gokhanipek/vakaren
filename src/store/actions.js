@@ -37,8 +37,11 @@ export const ADD_TO_WATCHLIST_RESPONSE = 'ADD_TO_WATCHLIST_RESPONSE';
 export const ADD_TO_FAVORITELIST = 'ADD_TO_FAVORITELIST';
 export const ADD_TO_FAVORITELIST_RESPONSE = 'ADD_TO_FAVORITELIST_RESPONSE';
 
-export const GET_LIST = 'GET_LIST';
-export const RECEIVE_LIST = 'RECEIVE_LIST';
+export const GET_FAV_LIST = 'GET_FAV_LIST';
+export const RECEIVE_FAV_LIST = 'RECEIVE_FAV_LIST';
+
+export const GET_WATCH_LIST = 'GET_WATCH_LIST';
+export const RECEIVE_WATCH_LIST = 'RECEIVE_WATCH_LIST';
 
 export const RESET_SEARCH_RESULTS = 'RESET_SEARCH_RESULTS'; 
 
@@ -74,8 +77,11 @@ export const receiveAccountDetails = data => ({ type: RECEIVE_ACCOUNT_DETAILS, d
 export const addToList = (movieId, accountId, listType) => ({ type: ADD_TO_LIST, movieId, accountId, listType });
 export const addToListResponse = data => ({ type: ADD_TO_LIST_RESPONSE, data });
 
-export const getList = (accountId, listType) => ({ type: GET_LIST, accountId, listType });
-export const receiveList = data => ({ type: RECEIVE_LIST, data });
+export const getFavList = accountId => ({ type: GET_FAV_LIST, accountId });
+export const getWatchList = accountId => ({ type: GET_WATCH_LIST, accountId });
+export const receiveFavList = data => ({ type: RECEIVE_FAV_LIST, data });
+export const receiveWatchList = data => ({ type: RECEIVE_WATCH_LIST, data });
+
 
 export const resetSearchResults = () => ({ type: RESET_SEARCH_RESULTS })
 

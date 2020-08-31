@@ -5,7 +5,6 @@ import './Authenticate.scss';
 
 const Authenticate = ({onClickHandler, isAuthenticated}) => {
 
-    // const sessionInfo = isAuthenticated ? 'Authenticated Session' : 'Unauthorized Session'
     const sessionInfo = isAuthenticated ? 'Authenticated Session' : 'Unauthorized Session';
     return (
         <div className={`authorize-image-container ${sessionInfo ? 'authenticated' : 'unauthenticated'}`}>

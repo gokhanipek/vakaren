@@ -9,6 +9,10 @@
     background-position: top left;
     border-radius: 15px;
     min-width: 350px;
+    @media only screen and (max-width: 600px) {
+        background-size: 70%;
+        background-position: -30% -30%;
+    }
     .card-buttons {
         .material-icons {
             margin-right: 10px;
@@ -22,6 +26,9 @@
         padding: 10px;
         .fav-or-watch {
             font-size: 2em;
+            &.fav, &.watchlist {
+                color: #03a9f4 !important
+            }
         }
     }
     .movie-card-overlay {

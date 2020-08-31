@@ -1,22 +1,27 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom'
-import { addToList, getAccountDetails, getList } from './../../store/actions'
+import { addToList, getAccountDetails, getWatchList, getFavList } from './../../store/actions'
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom'
-
+import { get } from 'lodash';
+import NoImage from './../../assets/images/no-image.png'
 import './MovieCard.scss';
 
-const MovieCard = ({movie, addToList, getAccountDetails, accountId, userList, favorited}) => {
-    const imageLink = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://i.ibb.co/jy2CY5L/no-image.png';
+const MovieCard = ({movie, addToList, accountId, favorited, watchlisted, getWatchList, getFavList, favoritedMovie}) => {
+    const imageLink = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : NoImage;
 
     const style = {
       backgroundImage: `url(${imageLink})`
     }
 
-    const isItFav = userList.includes(movie.id) ? 'hellooo' : 'noooo';
+    const clickHandler = (id, accountId, type) => {
+      addToList(id, accountId, type);
+    }
 
-    console.warn(favorited);
-
+    useEffect(() => {
+      getFavList(accountId);
+      getWatchList(accountId);
+    }, [favoritedMovie])
 
     return (
         <div className="col s12 m6">
@@ -30,8 +35,8 @@ const MovieCard = ({movie, addToList, getAccountDetails, accountId, userList, fa
               </div>
               <div className="movie-card-actions">
               <div className="card-buttons">
-                  <i className={`large material-icons white-text fav-or-watch`} onClick={() => addToList(movie.id, accountId, 'watchlist')}>access_time</i>
-                  <i className={`large material-icons white-text fav-or-watch ${favorited ? 'fav' : 'nonfav' }`} onClick={() => addToList(movie.id, accountId, 'favorite')}>favorite</i>
+                  <i className={`large material-icons white-text fav-or-watch ${watchlisted ? 'watchlist' : '' }`} onClick={() => clickHandler(movie.id, accountId, 'watchlist')}>access_time</i>
+                  <i className={`large material-icons white-text fav-or-watch ${favorited ? 'fav' : '' }`} onClick={() => addToList(movie.id, accountId, 'favorite')}>favorite</i>
                 </div>
               </div>
             </div>
@@ -44,11 +49,17 @@ const mapDispatchToProps = dispatch => {
   return {
       addToList: (movieId, accountId, listType) => dispatch(addToList(movieId, accountId, listType)),
       getAccountDetails: () => dispatch(getAccountDetails()),
-      getList: (accountId, listType) => dispatch(getList(accountId, listType))
+      getFavList: (accountId) => dispatch(getFavList(accountId)),
+      getWatchList: (accountId) => dispatch(getWatchList(accountId)),
   }
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(MovieCard));
+const mapStateToProps = state => ({ 
+  favoritedMovie: get(state, 'data.favoriteMovies.data.movieId', '') 
+});
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MovieCard));
 
 
 

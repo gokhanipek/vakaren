@@ -9,7 +9,8 @@ import {
   RECEIVE_MOVIE_VIDEOS,
   RECEIVE_MOVIE_POSTERS,
   RECEIVE_ACCOUNT_DETAILS,
-  RECEIVE_LIST,
+  RECEIVE_FAV_LIST,
+  RECEIVE_WATCH_LIST,
   RESET_SEARCH_RESULTS,
   ADD_TO_LIST_RESPONSE
 } from "../actions";
@@ -23,6 +24,7 @@ export default (state = initialState, { type, data }) => {
         ...state,
         apiToken: data
       };
+    //to be added in the future
     case RECEIVE_POPULAR_MOVIES: 
       return {
         ...state,
@@ -76,11 +78,16 @@ export default (state = initialState, { type, data }) => {
         ...state,
         accountDetails: data
       };
-    case RECEIVE_LIST: 
+    case RECEIVE_FAV_LIST: 
       return {
         ...state,
-        userList: data
+        userFavList: data
       }
+    case RECEIVE_WATCH_LIST: 
+      return {
+        ...state,
+        userWatchList: data
+      }  
     case RESET_SEARCH_RESULTS:
       return {
         ...state,
