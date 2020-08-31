@@ -13,11 +13,10 @@ export default () =>
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route path="/">
+        <Route exact path="/">
           <Home />
         </Route>
         <Route path="/movie/:id" component={MoviePage}/>
-        <Route path="/vakaren" component={Home}/>
       </Switch>
     </Router>
   </Provider>;
