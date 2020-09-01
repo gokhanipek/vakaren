@@ -1,23 +1,22 @@
 {
   "files": {
-    "main.css": "http://gokhanipek.github.io/vakaren/static/css/main.b03ed8c1.chunk.css",
-    "main.js": "http://gokhanipek.github.io/vakaren/static/js/main.ddbfd704.chunk.js",
-    "main.js.map": "http://gokhanipek.github.io/vakaren/static/js/main.ddbfd704.chunk.js.map",
+    "main.css": "http://gokhanipek.github.io/vakaren/static/css/main.76829a9a.chunk.css",
+    "main.js": "http://gokhanipek.github.io/vakaren/static/js/main.e02fb5f3.chunk.js",
+    "main.js.map": "http://gokhanipek.github.io/vakaren/static/js/main.e02fb5f3.chunk.js.map",
     "runtime-main.js": "http://gokhanipek.github.io/vakaren/static/js/runtime-main.1074080e.js",
     "runtime-main.js.map": "http://gokhanipek.github.io/vakaren/static/js/runtime-main.1074080e.js.map",
-    "static/js/2.3ae7619c.chunk.js": "http://gokhanipek.github.io/vakaren/static/js/2.3ae7619c.chunk.js",
-    "static/js/2.3ae7619c.chunk.js.map": "http://gokhanipek.github.io/vakaren/static/js/2.3ae7619c.chunk.js.map",
+    "static/js/2.72cdc6c8.chunk.js": "http://gokhanipek.github.io/vakaren/static/js/2.72cdc6c8.chunk.js",
+    "static/js/2.72cdc6c8.chunk.js.map": "http://gokhanipek.github.io/vakaren/static/js/2.72cdc6c8.chunk.js.map",
     "index.html": "http://gokhanipek.github.io/vakaren/index.html",
-    "precache-manifest.5058f39aebfce734c82e87ecf0dc22e2.js": "http://gokhanipek.github.io/vakaren/precache-manifest.5058f39aebfce734c82e87ecf0dc22e2.js",
+    "precache-manifest.e8157142aa1535d4f48fbdcc2216383c.js": "http://gokhanipek.github.io/vakaren/precache-manifest.e8157142aa1535d4f48fbdcc2216383c.js",
     "service-worker.js": "http://gokhanipek.github.io/vakaren/service-worker.js",
-    "static/css/main.b03ed8c1.chunk.css.map": "http://gokhanipek.github.io/vakaren/static/css/main.b03ed8c1.chunk.css.map",
-    "static/js/2.3ae7619c.chunk.js.LICENSE.txt": "http://gokhanipek.github.io/vakaren/static/js/2.3ae7619c.chunk.js.LICENSE.txt",
-    "static/media/github.png": "http://gokhanipek.github.io/vakaren/static/media/github.d22ee372.png"
+    "static/css/main.76829a9a.chunk.css.map": "http://gokhanipek.github.io/vakaren/static/css/main.76829a9a.chunk.css.map",
+    "static/js/2.72cdc6c8.chunk.js.LICENSE.txt": "http://gokhanipek.github.io/vakaren/static/js/2.72cdc6c8.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1074080e.js",
-    "static/js/2.3ae7619c.chunk.js",
-    "static/css/main.b03ed8c1.chunk.css",
-    "static/js/main.ddbfd704.chunk.js"
+    "static/js/2.72cdc6c8.chunk.js",
+    "static/css/main.76829a9a.chunk.css",
+    "static/js/main.e02fb5f3.chunk.js"
   ]
 }
