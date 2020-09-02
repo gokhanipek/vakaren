@@ -1,7 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
@@ -9,16 +9,6 @@ import store from "../store/store";
 import Home from "./Home/Home";
 import MoviePage from "./MoviePage/MoviePage";
 
-export default () =>
-  <Provider store={store}>
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/movie/:id" component={MoviePage}/>
-      </Switch>
-    </Router>
-  </Provider>;
+export default () => <h1>Hello react</h1>
 
   
