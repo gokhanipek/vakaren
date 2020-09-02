@@ -18,6 +18,18 @@
     }
     &.top {
         justify-content: flex-start;
+        .face {
+            display: none;
+        }
+        .logo {
+            padding: 10px;
+            height: 70px;
+            width: auto;
+        }
+        .contact {
+            opacity: 0;
+            visibility: hidden;
+        }
     }
     
 }

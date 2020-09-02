@@ -1,9 +1,12 @@
 export default {
     apiToken: {},
     searchResults: {
-        results: []
+        results: [],
     },
     searchHasResults: false,
     isAuthenticated: false,
-    movieDetails: []
+    movieDetails: {},
+    movieVideos: {},
+    moviePosters: {},
+    accountDetails: {},
 };
