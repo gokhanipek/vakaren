@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "90c640a3047cf0773df752f235eb62bc",
+    "revision": "f602a97da26f4a7b2f53bedbf8721f14",
     "url": "http://gokhanipek.github.io/vakaren/index.html"
   },
   {
-    "revision": "df5a66efd4b5f0f802c9",
+    "revision": "0c6bd5e5df765aebf4c5",
     "url": "http://gokhanipek.github.io/vakaren/static/css/2.fb346933.chunk.css"
   },
   {
-    "revision": "e1cf9c13072267a2922b",
-    "url": "http://gokhanipek.github.io/vakaren/static/css/main.1f8247e7.chunk.css"
+    "revision": "3ccbdc7338031583ba0d",
+    "url": "http://gokhanipek.github.io/vakaren/static/css/main.00046983.chunk.css"
   },
   {
-    "revision": "df5a66efd4b5f0f802c9",
-    "url": "http://gokhanipek.github.io/vakaren/static/js/2.a52c5aae.chunk.js"
+    "revision": "0c6bd5e5df765aebf4c5",
+    "url": "http://gokhanipek.github.io/vakaren/static/js/2.773aec00.chunk.js"
   },
   {
     "revision": "64bea2e190f27355a76963b8cb94bb7b",
-    "url": "http://gokhanipek.github.io/vakaren/static/js/2.a52c5aae.chunk.js.LICENSE.txt"
+    "url": "http://gokhanipek.github.io/vakaren/static/js/2.773aec00.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e1cf9c13072267a2922b",
-    "url": "http://gokhanipek.github.io/vakaren/static/js/main.805bb51b.chunk.js"
+    "revision": "3ccbdc7338031583ba0d",
+    "url": "http://gokhanipek.github.io/vakaren/static/js/main.1347b4a1.chunk.js"
   },
   {
     "revision": "0188cc28b96c1b59e470",
