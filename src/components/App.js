@@ -9,6 +9,17 @@ import store from "../store/store";
 import Home from "./Home/Home";
 import MoviePage from "./MoviePage/MoviePage";
 
-export default () => <h1>Hello react</h1>
+export default () =>
+  <Provider store={store}>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/movie/:id" component={MoviePage}/>
+        <Route path="/*" component={Home}/>
+      </Switch>
+    </Router>
+  </Provider>;
 
   
