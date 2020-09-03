@@ -3,13 +3,12 @@ import Spy from './../../assets/images/anonymous.png';
 import SpyDark from './../../assets/images/anonymous-dark.png';
 import './Authenticate.scss';
 
-const Authenticate = ({onClickHandler, isAuthenticated}) => {
+const Authenticate = ({onClickHandler}) => {
 
-    const sessionInfo = isAuthenticated ? 'Authenticated Session' : 'Unauthorized Session';
     return (
-        <div className={`authorize-image-container ${sessionInfo ? 'authenticated' : 'unauthenticated'}`}>
-            <img className="authorize-image" alt="spy" data-position="bottom" data-tooltip="I am a tooltip" src={sessionInfo ? Spy : SpyDark} onClick={() => { onClickHandler() }}/>
-            <p>{sessionInfo}</p>
+        <div className={`authorize-image-container ${true ? 'authenticated' : 'unauthenticated'}`}>
+            <img className="authorize-image" alt="spy" data-position="bottom" data-tooltip="I am a tooltip" src={true ? Spy : SpyDark} onClick={() => { onClickHandler() }}/>
+            <p>Auth</p>
         </div>
     )}
 

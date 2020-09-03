@@ -77,7 +77,7 @@ const SearchMovies = ({
                         Search
                     </button>            
                     <span type="submit" className="waves-effect waves-light btn light-blue" onClick={() => onClickRandomMovieHandler()}>
-                        I feel lucky
+                        I feel luckyy
                     </span>
                 </div>
             </form>

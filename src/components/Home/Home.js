@@ -8,6 +8,7 @@ import Logo from './../Logo/Logo';
 import './Home.scss';
 import Authenticate from "../Authenticate/Authenticate";
 import Contact from "../Contact/Contact";
+import { get } from "lodash";
 
 const Home = ({getAuthTokenAction, location, searchResults, requestSessionId, resetSearchResults}) => {
   useEffect(() => {
@@ -58,7 +59,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators({ getAuthTokenAction, getPopularMoviesAction, requestSessionId, getAccountDetails, resetSearchResults }, dispatch);
 
 const mapStateToProps = state => ({ 
-    searchResults: state.data.searchResults.results || null 
+    searchResults: get(state, 'data.searchResults.results', []) 
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

@@ -30,7 +30,7 @@ const MovieCard = ({movie, addToList, accountId, favorited, watchlisted, getWatc
             <div className="movie-card" style={style}>
               <div className="movie-card-overlay"></div>
               <div className="movie-card-right-side">
-                <h2 className="card-title">{movie.original_title}</h2>
+                <h2 className="card-title">movie  title{movie.original_title}</h2>
                 <span className="card-date">{movie.release_date}</span>
                 <span className="card-description">{movie.overview.substring(0,150)}...</span>
                 <Link to={`/movie/${movie.id}`} className="btn btn-outline movie-card__button"> Details </Link>

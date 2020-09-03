@@ -1,12 +1,9 @@
 import React from 'react';
-import App from './components/App';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
+import App from './App';
 
-
-describe('authenticate', () => {
-  it('should render App component', () => {
-    const component = shallow(<App/>);
-  
-    expect(component).toMatchSnapshot();
-  });
+test('renders learn react link', () => {
+  const { getByText } = render(<App />);
+  const linkElement = getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
 });
