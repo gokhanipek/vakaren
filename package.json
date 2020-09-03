@@ -2,15 +2,14 @@
   "name": "vakaren",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://gokhanipek.github.io/vakaren-old/",
+  "homepage": "http://gokhanipek.github.io/vakaren",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.3",
+    "enzyme-adapter-react-16": "^1.15.4",
     "lodash": "^4.17.20",
-    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
@@ -18,13 +17,14 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "redux-devtools-extension": "^2.13.8",
-    "redux-saga": "^1.1.3"
+    "redux-saga": "^1.1.3",
+    "sass": "^1.26.10"
   },
   "scripts": {
     "start": "react-scripts start",
+    "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -44,10 +44,10 @@
     ]
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
-    "jest-enzyme": "^7.0.2",
-    "dotenv": "^8.2.0",
-    "gh-pages": "^3.1.0"
+    "gh-pages": "^3.1.0",
+    "jest-enzyme": "^7.0.2"
   }
 }
