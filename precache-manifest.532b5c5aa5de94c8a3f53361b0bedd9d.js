@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f602a97da26f4a7b2f53bedbf8721f14",
+    "revision": "02e9a2ef08d1c1a55e9dbdd88d600dde",
     "url": "http://gokhanipek.github.io/vakaren/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "http://gokhanipek.github.io/vakaren/static/css/2.fb346933.chunk.css"
   },
   {
-    "revision": "3ccbdc7338031583ba0d",
+    "revision": "6062eb241c9c731228f7",
     "url": "http://gokhanipek.github.io/vakaren/static/css/main.00046983.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "http://gokhanipek.github.io/vakaren/static/js/2.773aec00.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "3ccbdc7338031583ba0d",
-    "url": "http://gokhanipek.github.io/vakaren/static/js/main.1347b4a1.chunk.js"
+    "revision": "6062eb241c9c731228f7",
+    "url": "http://gokhanipek.github.io/vakaren/static/js/main.074614d9.chunk.js"
   },
   {
     "revision": "0188cc28b96c1b59e470",
