@@ -9,8 +9,9 @@ import store from "../store/store";
 import Home from "./Home/Home";
 import MoviePage from "./MoviePage/MoviePage";
 
-export default () =>
-  <Provider store={store}>
+function App() {
+  return (
+    <Provider store={store}>
     <Router>
       <Switch>
         <Route exact path="/">
@@ -20,6 +21,9 @@ export default () =>
         <Route path="/*" component={Home}/>
       </Switch>
     </Router>
-  </Provider>;
+  </Provider>
+  )
+}
 
+export default App;
   
