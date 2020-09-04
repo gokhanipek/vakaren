@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "09936f464e122e7a561497534b3bbf67",
+    "revision": "6b7de87b4e4fa0f385c89710cc6bb133",
     "url": "/vakaren/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/vakaren/static/css/2.fb346933.chunk.css"
   },
   {
-    "revision": "c7e6936692d1ca3900fb",
+    "revision": "09e77b92400c3c576669",
     "url": "/vakaren/static/css/main.e3e8f9c8.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/vakaren/static/js/2.6b28687d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c7e6936692d1ca3900fb",
-    "url": "/vakaren/static/js/main.34f747de.chunk.js"
+    "revision": "09e77b92400c3c576669",
+    "url": "/vakaren/static/js/main.a9a588a2.chunk.js"
   },
   {
     "revision": "496f4d6d571d9c71946c",
