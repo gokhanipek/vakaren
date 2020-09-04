@@ -49,6 +49,8 @@ const Home = ({getAuthTokenAction, location, searchResults, requestSessionId, re
           <Logo onClickHandler={onLogoClickHandler}/>
           <SearchMovies/>
           <Contact/>
+
+          conttta
       </div>
     </div>
     )

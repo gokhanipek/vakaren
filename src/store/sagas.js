@@ -118,6 +118,8 @@ export function* getMoviePosters (action) {
 }
 
 export function* getMovieSearch(action) {
+  console.warn(apiKey);
+
   try {
       const response = yield fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${action.query}&page=${action.page}&include_adult=false`);
       const data = yield response.json();
