@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/vakaren/static/css/main.e3e8f9c8.chunk.css",
-    "main.js": "/vakaren/static/js/main.a9a588a2.chunk.js",
-    "main.js.map": "/vakaren/static/js/main.a9a588a2.chunk.js.map",
+    "main.js": "/vakaren/static/js/main.4bd5b67a.chunk.js",
+    "main.js.map": "/vakaren/static/js/main.4bd5b67a.chunk.js.map",
     "runtime-main.js": "/vakaren/static/js/runtime-main.586853d7.js",
     "runtime-main.js.map": "/vakaren/static/js/runtime-main.586853d7.js.map",
     "static/css/2.fb346933.chunk.css": "/vakaren/static/css/2.fb346933.chunk.css",
     "static/js/2.6b28687d.chunk.js": "/vakaren/static/js/2.6b28687d.chunk.js",
     "static/js/2.6b28687d.chunk.js.map": "/vakaren/static/js/2.6b28687d.chunk.js.map",
     "index.html": "/vakaren/index.html",
-    "precache-manifest.07a2fd6c647e5e5247c0b21c7964fa40.js": "/vakaren/precache-manifest.07a2fd6c647e5e5247c0b21c7964fa40.js",
+    "precache-manifest.a84a99a0b8abb20af46cb4b1feb79bfd.js": "/vakaren/precache-manifest.a84a99a0b8abb20af46cb4b1feb79bfd.js",
     "service-worker.js": "/vakaren/service-worker.js",
     "static/css/2.fb346933.chunk.css.map": "/vakaren/static/css/2.fb346933.chunk.css.map",
     "static/css/main.e3e8f9c8.chunk.css.map": "/vakaren/static/css/main.e3e8f9c8.chunk.css.map",
@@ -25,6 +25,6 @@
     "static/css/2.fb346933.chunk.css",
     "static/js/2.6b28687d.chunk.js",
     "static/css/main.e3e8f9c8.chunk.css",
-    "static/js/main.a9a588a2.chunk.js"
+    "static/js/main.4bd5b67a.chunk.js"
   ]
 }
