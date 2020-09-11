@@ -1,30 +1,30 @@
 {
   "files": {
-    "main.css": "/vakaren/static/css/main.e3e8f9c8.chunk.css",
-    "main.js": "/vakaren/static/js/main.4bd5b67a.chunk.js",
-    "main.js.map": "/vakaren/static/js/main.4bd5b67a.chunk.js.map",
-    "runtime-main.js": "/vakaren/static/js/runtime-main.586853d7.js",
-    "runtime-main.js.map": "/vakaren/static/js/runtime-main.586853d7.js.map",
-    "static/css/2.fb346933.chunk.css": "/vakaren/static/css/2.fb346933.chunk.css",
-    "static/js/2.6b28687d.chunk.js": "/vakaren/static/js/2.6b28687d.chunk.js",
-    "static/js/2.6b28687d.chunk.js.map": "/vakaren/static/js/2.6b28687d.chunk.js.map",
-    "index.html": "/vakaren/index.html",
-    "precache-manifest.a84a99a0b8abb20af46cb4b1feb79bfd.js": "/vakaren/precache-manifest.a84a99a0b8abb20af46cb4b1feb79bfd.js",
-    "service-worker.js": "/vakaren/service-worker.js",
-    "static/css/2.fb346933.chunk.css.map": "/vakaren/static/css/2.fb346933.chunk.css.map",
-    "static/css/main.e3e8f9c8.chunk.css.map": "/vakaren/static/css/main.e3e8f9c8.chunk.css.map",
-    "static/js/2.6b28687d.chunk.js.LICENSE.txt": "/vakaren/static/js/2.6b28687d.chunk.js.LICENSE.txt",
-    "static/media/anonymous-dark.png": "/vakaren/static/media/anonymous-dark.29167867.png",
-    "static/media/anonymous.png": "/vakaren/static/media/anonymous.30a0a053.png",
-    "static/media/github.png": "/vakaren/static/media/github.d22ee372.png",
-    "static/media/no-image.png": "/vakaren/static/media/no-image.5fb4e99e.png",
-    "static/media/vakaren.png": "/vakaren/static/media/vakaren.2582dbc8.png"
+    "main.css": "/vakaren-old/static/css/main.e3e8f9c8.chunk.css",
+    "main.js": "/vakaren-old/static/js/main.df860869.chunk.js",
+    "main.js.map": "/vakaren-old/static/js/main.df860869.chunk.js.map",
+    "runtime-main.js": "/vakaren-old/static/js/runtime-main.d91edb86.js",
+    "runtime-main.js.map": "/vakaren-old/static/js/runtime-main.d91edb86.js.map",
+    "static/css/2.fb346933.chunk.css": "/vakaren-old/static/css/2.fb346933.chunk.css",
+    "static/js/2.facb5e40.chunk.js": "/vakaren-old/static/js/2.facb5e40.chunk.js",
+    "static/js/2.facb5e40.chunk.js.map": "/vakaren-old/static/js/2.facb5e40.chunk.js.map",
+    "index.html": "/vakaren-old/index.html",
+    "precache-manifest.b5c886120a0f4c4475d5dbbdf36e4bbc.js": "/vakaren-old/precache-manifest.b5c886120a0f4c4475d5dbbdf36e4bbc.js",
+    "service-worker.js": "/vakaren-old/service-worker.js",
+    "static/css/2.fb346933.chunk.css.map": "/vakaren-old/static/css/2.fb346933.chunk.css.map",
+    "static/css/main.e3e8f9c8.chunk.css.map": "/vakaren-old/static/css/main.e3e8f9c8.chunk.css.map",
+    "static/js/2.facb5e40.chunk.js.LICENSE.txt": "/vakaren-old/static/js/2.facb5e40.chunk.js.LICENSE.txt",
+    "static/media/anonymous-dark.png": "/vakaren-old/static/media/anonymous-dark.29167867.png",
+    "static/media/anonymous.png": "/vakaren-old/static/media/anonymous.30a0a053.png",
+    "static/media/github.png": "/vakaren-old/static/media/github.d22ee372.png",
+    "static/media/no-image.png": "/vakaren-old/static/media/no-image.5fb4e99e.png",
+    "static/media/vakaren.png": "/vakaren-old/static/media/vakaren.2582dbc8.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.586853d7.js",
+    "static/js/runtime-main.d91edb86.js",
     "static/css/2.fb346933.chunk.css",
-    "static/js/2.6b28687d.chunk.js",
+    "static/js/2.facb5e40.chunk.js",
     "static/css/main.e3e8f9c8.chunk.css",
-    "static/js/main.4bd5b67a.chunk.js"
+    "static/js/main.df860869.chunk.js"
   ]
 }
